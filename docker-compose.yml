@@ -1,7 +1,7 @@
 version: "3"
 
 services:
-  fastapi:
+  FastAPI:
     image: image-fastapi
     environment:
       TRANSLATOR_AUTH_KEY: "a4341cbe-a8bd-4ac2-97e4-6bce2574cf8a:fx"
@@ -10,6 +10,8 @@ services:
       TARGET_LANGUAGE: "traductor_data.target_lang"
     volumes:
       - ./data:/app/data
+      - ./app:/app # Agregue esta línea para incluir el directorio "app"
+    working_dir: /app # Cambie el directorio de trabajo a "app"
     build: .
     container_name: fastapi-application
     ports:

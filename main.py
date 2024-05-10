@@ -2,7 +2,7 @@ from fastapi import FastAPI, Request
 from pydantic import BaseModel
 from app.traductor import traductor_func
 from app.video import video_func
-
+from app.scanTexto import scanTexto_func
 
 app = FastAPI()
 
@@ -12,15 +12,12 @@ class Libro(BaseModel):
     paginas: int
     editorial: str
     
+class ScanTexto(BaseModel):
+    image_path: str
 
 @app.get("/")
-def root():
-    return {"message": "Bienvenidos a mi FastAPI aplicacion! Saludos de Fran Romero desde España"}
-    
-
-#@app.get("/")
-#def index():
-#    return {"message" : "Hola, Pythonianos"}
+def index():
+    return {"message" : "Hola, Pythonianos"}
 
 @app.get("/libros/({id}")
 def mostrar_libro(id: int):
@@ -43,6 +40,17 @@ def eliminar_libro(id: int):
     return {"message": f"libro (libro.titulo) eliminado"}
 
 
+    
+@app.post("/scanTexto")
+async def scanTexto_endpoint(request: Request, scanTexto_data: ScanTexto):
+    image_path = scanTexto_data.image_path
+
+    try:
+        escaner = scanTexto_func(image_path)
+        return {"data": escaner}
+    except Exception as e:
+        print(f"Error extracting text: {e}")
+        return {"error": str(e)}
 
 
 class TraductorRequest(BaseModel):
