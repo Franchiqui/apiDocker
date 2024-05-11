@@ -1,6 +1,11 @@
 # Usa la imagen base de tiangolo/uvicorn-gunicorn-fastapi para Python 3.12
 FROM python:3.11-slim
 
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install\
+    libgl1\
+    libgl1-mesa-glx \
+    libglib2.0-0 -y && \
+    rm -rf /var/lib/apt/lists/*
 
 ENV PIP_DISABLE_PIP_VERSION_CHECK=1
 ENV PYTHONUNBUFFERED=1
