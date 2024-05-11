@@ -15,7 +15,7 @@ def scanTexto_func(imagePath):
     # Cargar la imagen
     img = cv2.imread(imagePath)
 
-    # Comprobar si la imagen se leyó correctamente.
+    # Compruebe si la imagen se leyó correctamente.
     if img is None:
         raise Exception("Error loading image: {}".format(imagePath))
 
@@ -29,7 +29,10 @@ def scanTexto_func(imagePath):
     pytesseract.pytesseract.tesseract_cmd = r'C:/Archivos de programa/Tesseract-OCR/tesseract.exe'
 
     # Establecer el idioma del texto
-    text = pytesseract.image_to_string(threshold_img, config='--psm 10 lang=es')
+    text = pytesseract.image_to_string(img, config='--psm 10 lang=es')
+
+    # Extraer texto usando pytesseract
+    text = pytesseract.image_to_string(threshold_img)
 
     # Devolver el texto extraído
     return text
@@ -40,3 +43,4 @@ image_path = "D:/apiDocker/data/texto.jpg"
 extracted_text = scanTexto_func(image_path)
 
 print(extracted_text)
+
