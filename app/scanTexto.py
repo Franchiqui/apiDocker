@@ -37,10 +37,5 @@ def scanTexto_func(imagePath):
     # Devolver el texto extraído
     return text
 
-# Ejemplo de uso con parámetros
-image_path = "D:/apiDocker/data/texto.jpg"
 
-extracted_text = scanTexto_func(image_path)
-
-print(extracted_text)
 
