@@ -1,8 +1,11 @@
 from fastapi import FastAPI, Request
 from pydantic import BaseModel
+from fastapi.middleware.cors import CORSMiddleware
 from app.traductor import traductor_func
 from app.video import video_func
 from app.scanTexto import scanTexto_func
+
+origins = ["*"]
 
 app = FastAPI()
 
@@ -14,6 +17,14 @@ class Libro(BaseModel):
     
 class ScanTexto(BaseModel):
     image_path: str
+    
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allow_headers=["*"],
+)
 
 @app.get("/")
 def index():
