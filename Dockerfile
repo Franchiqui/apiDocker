@@ -1,5 +1,5 @@
 # Usa la imagen base de tiangolo/uvicorn-gunicorn-fastapi para Python 3.12
-FROM tiangolo/uvicorn-gunicorn:python3.11
+FROM python:3.11-slim
 
 
 ENV PIP_DISABLE_PIP_VERSION_CHECK=1
