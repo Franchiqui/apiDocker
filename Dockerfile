@@ -1,5 +1,5 @@
 # Usa la imagen base de tiangolo/uvicorn-gunicorn-fastapi para Python 3.12
-FROM python:3
+FROM tiangolo/uvicorn-gunicorn-fastapi:python3.12
 
 ENV PIP_DISABLE_PIP_VERSION_CHECK=1
 ENV PYTHONUNBUFFERED=1
@@ -14,6 +14,10 @@ RUN python -m venv venv
 
 RUN /bin/bash -c "source venv/bin/activate"
 
+RUN apt-get update \
+    && apt-get install -y libgl1-mesa-glx \
+    && rm -rf /var/lib/apt/lists/*
+
 # Instalar las dependencias
 RUN pip install -r requirements.txt
 
@@ -21,7 +25,7 @@ RUN pip install -r requirements.txt
 COPY . .
 
 # Exponer el puerto 8000 en el contenedor
-EXPOSE 8000
+EXPOSE 80
 
 # Comando para ejecutar la aplicación utilizando uvicorn
-CMD ["uvicorn", "main:app", "--reload", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "main:app", "--reload", "--host", "0.0.0.0", "--port", "80"]
