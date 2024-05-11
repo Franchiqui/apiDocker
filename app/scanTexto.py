@@ -38,7 +38,7 @@ def scanTexto_func(imagePath):
     return text
 
 # Ejemplo de uso con parámetros
-image_path = "C:/PROYECTO_TEXIMAGE/Fotos_Ejemplo/foto2.jpg"
+image_path = "D:/apiDocker/data/texto.jpg"
 
 extracted_text = scanTexto_func(image_path)
 
