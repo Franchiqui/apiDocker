@@ -1,5 +1,5 @@
 # Usa la imagen base de tiangolo/uvicorn-gunicorn-fastapi para Python 3.12
-FROM python:3.11-slim
+FROM python:3
 
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install\
     libgl1\
